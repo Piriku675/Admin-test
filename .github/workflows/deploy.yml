@@ -1,4 +1,4 @@
-name: Deploy Admin Branch
+name: Deploy Public Folder
 
 on:
   push:
@@ -17,17 +17,17 @@ jobs:
       - name: Checkout main branch
         uses: actions/checkout@v4
 
-      - name: Verify admin folder exists
+      - name: Verify public folder exists
         run: |
           echo "Listing repo root:"
           ls -la
-          echo "Checking admin folder:"
-          ls -la admin
+          echo "Checking public folder:"
+          ls -la public
 
       - name: Prepare deploy directory
         run: |
           mkdir deploy
-          cp -r admin/. deploy/
+          cp -r public/. deploy/
 
       - name: Init admin branch and commit
         run: |
@@ -39,7 +39,7 @@ jobs:
           git config user.email "github-actions@github.com"
 
           git add .
-          git commit -m "Deploy admin" || echo "No changes to commit"
+          git commit -m "Deploy public" || echo "No changes to commit"
 
       - name: Push to admin branch
         run: |
