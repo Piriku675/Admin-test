@@ -13,12 +13,12 @@ import {
 
 // ─── YOUR Firebase config ─────────────────────────────────────────────────────
 const firebaseConfig = {
-  apiKey:            "YOUR_API_KEY",
-  authDomain:        "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId:         "YOUR_PROJECT_ID",
-  storageBucket:     "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId:             "YOUR_APP_ID",
+  apiKey: "AIzaSyC_jnnXGuIBsF2dU-sKck-Tu200Gx7FCAU",
+  authDomain: "careercanvasv2.firebaseapp.com",
+  projectId: "careercanvasv2",
+  storageBucket: "careercanvasv2.firebasestorage.app",
+  messagingSenderId: "734354241360",
+  appId: "1:734354241360:web:020a95e3b17881e2a91e55"
 };
 
 const fbApp = initializeApp(firebaseConfig);
