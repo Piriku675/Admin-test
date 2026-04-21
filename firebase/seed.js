@@ -127,6 +127,12 @@ const seedData = {
     updatedAt:  admin.firestore.FieldValue.serverTimestamp(),
   },
 
+  // ── Admin auth ──────────────────────────────────────────────────────────────
+  adminAuth: {
+    password:  "admin123",    // change this immediately via Settings in admin panel
+    updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+  },
+
   // ── Footer ──────────────────────────────────────────────────────────────────
   footer: {
     copyright: "© 2026 Alex Morgan. All rights reserved.",
