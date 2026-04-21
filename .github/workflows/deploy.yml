@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy Admin Branch
 
 on:
   push:
@@ -7,31 +7,41 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout main branch
         uses: actions/checkout@v4
 
-      - name: Build deploy folder
+      - name: Verify admin folder exists
         run: |
-          mkdir -p _deploy
-          cp -r frontend/. _deploy/
-          cp -r admin _deploy/admin
+          echo "Listing repo root:"
+          ls -la
+          echo "Checking admin folder:"
+          ls -la admin
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
+      - name: Prepare deploy directory
+        run: |
+          mkdir deploy
+          cp -r admin/. deploy/
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./_deploy
+      - name: Init admin branch and commit
+        run: |
+          cd deploy
+          git init
+          git checkout -b admin
 
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add .
+          git commit -m "Deploy admin" || echo "No changes to commit"
+
+      - name: Push to admin branch
+        run: |
+          cd deploy
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git admin --force
